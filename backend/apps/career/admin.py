@@ -28,5 +28,7 @@ class WorkExperienceAdmin(admin.ModelAdmin):
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
-    list_display = ("title",)
+    list_display = ("title", "category", "proficiency")
+    list_filter = ("category",)
     search_fields = ("title",)
+    ordering = ("-proficiency",)

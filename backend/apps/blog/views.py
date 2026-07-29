@@ -19,17 +19,20 @@ class CategoryListView(APIView):
 class PostListView(APIView):
     def get(self, request):
         posts = Post.objects.select_related("category", "seo").prefetch_related("tags")
+        tag = request.query_params.get("tag")
+        if tag:
+            posts = posts.filter(tags__slug=tag).distinct()
         paginator = PageNumberPagination()
         page = paginator.paginate_queryset(posts, request)
-        serializer = PostListSerializer(page, many=True)
+        serializer = PostListSerializer(page, many=True, context={"request": request})
         return paginator.get_paginated_response(serializer.data)
 
 
 class PostDetailView(APIView):
-    def get(self, request, pk):
+    def get(self, request, slug):
         post = get_object_or_404(
             Post.objects.select_related("category", "seo").prefetch_related("tags", "comments"),
-            pk=pk,
+            slug=slug,
         )
-        serializer = PostDetailSerializer(post)
+        serializer = PostDetailSerializer(post, context={"request": request})
         return Response(serializer.data)

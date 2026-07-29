@@ -18,10 +18,12 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ("title", "category", "created_at")
+    list_display = ("title", "category", "published_at", "reading_time")
     list_filter = ("category", "tags")
-    search_fields = ("title", "content")
+    search_fields = ("title", "content", "excerpt")
+    prepopulated_fields = {"slug": ("title",)}
     filter_horizontal = ("tags",)
+    readonly_fields = ("reading_time",)
     inlines = [CommentInline]
 
 

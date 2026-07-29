@@ -22,7 +22,15 @@ class ProjectListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ["id", "title", "description", "tags", "created_at"]
+        fields = [
+            "id",
+            "title",
+            "slug",
+            "description",
+            "cover_image",
+            "tags",
+            "featured",
+        ]
 
 
 class ProjectDetailSerializer(serializers.ModelSerializer):
@@ -37,7 +45,13 @@ class ProjectDetailSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "title",
+            "slug",
             "description",
+            "content",
+            "cover_image",
+            "repo_url",
+            "live_url",
+            "featured",
             "skills",
             "tags",
             "seo",

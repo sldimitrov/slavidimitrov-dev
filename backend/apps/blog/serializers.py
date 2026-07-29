@@ -17,20 +17,41 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class PostListSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
     tags = TagSerializer(many=True, read_only=True)
 
     class Meta:
         model = Post
-        fields = ["id", "title", "category", "tags", "created_at"]
+        fields = [
+            "id",
+            "title",
+            "slug",
+            "excerpt",
+            "cover_image",
+            "published_at",
+            "reading_time",
+            "tags",
+        ]
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
     tags = TagSerializer(many=True, read_only=True)
+    category = CategorySerializer(read_only=True)
     seo = SEOMetaSerializer(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Post
-        fields = ["id", "title", "content", "category", "tags", "seo", "comments", "created_at", "updated_at"]
+        fields = [
+            "id",
+            "title",
+            "slug",
+            "excerpt",
+            "content",
+            "cover_image",
+            "published_at",
+            "reading_time",
+            "tags",
+            "category",
+            "seo",
+            "comments",
+        ]

@@ -16,14 +16,19 @@ class EducationSerializer(serializers.ModelSerializer):
 
 
 class WorkExperienceSerializer(serializers.ModelSerializer):
-    achievements = AchievementSerializer(many=True, read_only=True)
+    achievements = serializers.SerializerMethodField()
 
     class Meta:
         model = WorkExperience
         fields = ["id", "company", "role", "start_date", "end_date", "description", "achievements"]
 
+    def get_achievements(self, obj):
+        return [achievement.title for achievement in obj.achievements.all()]
+
 
 class SkillSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source="title")
+
     class Meta:
         model = Skill
-        fields = ["id", "title", "description"]
+        fields = ["id", "name", "category", "proficiency"]

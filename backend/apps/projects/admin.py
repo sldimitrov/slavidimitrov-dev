@@ -15,7 +15,9 @@ class ProjectLinkInline(admin.TabularInline):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ("title", "created_at")
+    list_display = ("title", "featured", "created_at")
+    list_filter = ("featured", "tags")
     search_fields = ("title", "description")
+    prepopulated_fields = {"slug": ("title",)}
     filter_horizontal = ("skills", "tags")
     inlines = [ProjectImageInline, ProjectLinkInline]

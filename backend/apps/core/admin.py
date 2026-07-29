@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import SEOMeta, Tag
+from .models import ContactMessage, SEOMeta, Tag
 
 
 @admin.register(Tag)
@@ -14,3 +14,14 @@ class TagAdmin(admin.ModelAdmin):
 class SEOMetaAdmin(admin.ModelAdmin):
     list_display = ("title",)
     search_fields = ("title",)
+
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ("name", "email", "created_at")
+    search_fields = ("name", "email", "message")
+    readonly_fields = ("name", "email", "message", "created_at")
+    ordering = ("-created_at",)
+
+    def has_add_permission(self, request):
+        return False
