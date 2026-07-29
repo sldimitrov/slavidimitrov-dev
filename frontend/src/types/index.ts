@@ -56,7 +56,7 @@ export interface WorkExperienceItem {
   achievements: string[];
 }
 
-export type SkillCategory = "language" | "framework" | "tool";
+export type SkillCategory = "language" | "framework" | "tool" | "database" | "automation" | "infrastructure";
 
 export interface SkillItem {
   id: number;
