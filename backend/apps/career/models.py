@@ -46,10 +46,13 @@ class Skill(Timestamped):
     class Category(models.TextChoices):
         LANGUAGE = "language", "Language"
         FRAMEWORK = "framework", "Framework"
-        TOOL = "tool", "Tool"
+        TOOL = "tool",
+        DATABASE = "database",
+        AUTOMATION = "automation",
+        INFRASTRUCTURE = "infrastructure"
 
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     category = models.CharField(
         max_length=20, choices=Category.choices, default=Category.LANGUAGE
     )

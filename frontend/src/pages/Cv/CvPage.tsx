@@ -51,9 +51,12 @@ const CATEGORY_LABELS: Record<SkillCategory, string> = {
   language: "Languages",
   framework: "Frameworks & Libraries",
   tool: "Tools",
+  database: "Databases",
+  automation: "Automations",
+  infrastructure: "Infrastructure",
 };
 
-const CATEGORY_ORDER: SkillCategory[] = ["language", "framework", "tool"];
+const CATEGORY_ORDER: SkillCategory[] = ["language", "framework", "tool", "database", "automation", "infrastructure"];
 
 function groupSkillsByCategory(skills: SkillItem[]) {
   const groups = new Map<SkillCategory, SkillItem[]>();
